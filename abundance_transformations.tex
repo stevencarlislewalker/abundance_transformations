@@ -1,0 +1,156 @@
+\documentclass{article}
+
+\title{Abundance transformations}
+\author{Steve Walker}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+Much of biological theory involves models that track the dynamics of the abundances of related biological entities (e.g. tissues, genotypes, species, epidemiological status).  Although these abundance models are of interest in their own right, they also form the basis of the dynamics of non-abundance measures.  For example, Price's equation translates 
+
+Here we describe how to transform intrinsic growth rate vectors so that they may be used 
+
+Here we describe the abundance-elasticity matrix, which provides a linear transformation of intrinsic growth rate vectors.  
+
+\section{Ordinary differential equation models}
+
+We consider $n$ types of biological groups (e.g. tissues, genotypes, species).  The rate of change of the abundance, $x_i$, of the $i$th group is given by the following general equation.
+\begin{equation}
+\frac{\partial x_i}{\partial t} = r_i(x, \theta) x_i
+\end{equation}
+where $r_i$ is a function of the abundance vector, $x$, of all $n$ types and a vector of other factors, $\theta$.  This function, $r_i$, returns the intrinsic rate of increase of type $i$.
+
+
+
+\begin{equation}
+F(x, \theta) = \sum_{i = 1}^n f_i(x, \theta)
+\end{equation}
+
+\begin{equation}
+\frac{\partial F(x, \theta)}{\partial t} = 
+\sum_{i = 1}^n \sum_{j = 1}^n
+f_i(x, \theta)\epsilon_{ij}(x, \theta)r_j(x, \theta)
++ 
+\sum_{i = 1}^n\sum_{k = 1}^m
+\frac{\partial f_i(x, \theta)}{\partial \theta_k}
+\frac{\partial \theta_k}{\partial t}
+\end{equation}
+
+\begin{equation}
+\epsilon_{ij}(x, \theta) = 
+\frac{x_j}{f_i(x, \theta)}
+\frac{\partial f_i(x, \theta)}{\partial x_j}
+\end{equation}
+
+\begin{equation}
+r_j(x, \theta) = \frac{1}{x_j}\frac{\partial x_j}{\partial t}
+\end{equation}
+
+\subsection{Main results}
+
+Assume $f_i$, $\epsilon_{ij}$, $r_j$, $g_{ik}$, and $\psi_k$ can all depend on $x$ and $\theta$. We then have our main result.
+\begin{equation}
+\frac{\partial f_i}{\partial t} = 
+f_i\sum_{j = 1}^n\epsilon_{ij}r_j + \sum_{k = 1}^mg_{ik}\psi_k
+\end{equation}
+where the abundance transformation is $f_i$, the abundance-elasticity is
+\begin{equation}
+\epsilon_{ij} = 
+\frac{x_j}{f_i}
+\frac{\partial f_i}{\partial x_j}
+\end{equation}
+the intrinsic growth rate is
+\begin{equation}
+r_j(x, \theta) = \frac{1}{x_j}\frac{\partial x_j}{\partial t}
+\end{equation}
+the derivative of the abundance transformation with respect to an external factor, $\theta_k$, is
+\begin{equation}
+g_{ik} = \frac{\partial f_i}{\partial \theta_k}
+\end{equation}
+and the rate of change of $\theta_k$ is
+\begin{equation}
+\psi_k = \frac{\partial \theta_k}{\partial t}
+\end{equation}
+
+\subsection{Examples}
+
+\subsubsection{Price equation}
+
+Definition.
+\begin{equation}
+f_i(x, \theta) = p_i\theta_i
+\end{equation}
+
+Elasticity.
+\begin{equation}
+\epsilon_{ij}(x, \theta) = \delta_{ij} - p_j
+\end{equation}
+where
+\begin{equation}
+p_i = \frac{x_i}{\sum_{j = 1}^n x_j}
+\end{equation}
+
+Transformation.
+\begin{equation}
+\sum_{j = 1}^n \epsilon_{ij} r_j = r_i - \bar{r}
+\end{equation}
+
+Total.
+\begin{equation}
+\sum_{i = 1}^n\sum_{j = 1}^nf_i\epsilon_{ij}r_j = 
+\underbrace{Cov(r, \theta)}_{\mathrm{Trait-fitness\ covariance}}
+\end{equation}
+
+\subsubsection{Functional diversity}
+
+\subsubsection{Expected species richness}
+
+Definition.
+\begin{equation}
+f_i(x, \theta) = 1 - (1 - p_i)^m
+\end{equation}
+
+Elasticity.
+\begin{equation}
+\epsilon_{ij} = 
+\frac{mp_j\left(1 - p_i\right)^{m-1}\left(\delta_{ij} - p_i\right)}{1 - \left(1 - p_i\right)^m}
+\end{equation}
+
+Transformation.
+\begin{equation}
+\sum_{j = 1}^n \epsilon_{ij} r_j = 
+\frac{mp_i(1 - p_i)^{m-1}\left(r_i - \bar{r}\right)}{1 - (1 - p_i)^m}
+\end{equation}
+
+Total.
+\begin{equation}
+\sum_{i = 1}^n\sum_{j = 1}^nf_i\epsilon_{ij}r_j = 
+\sum_{i = 1}^n
+\underbrace{mp_i(1 - p_i)^{m-1}}_{\mathrm{Singleton\ probability}}
+\underbrace{\left(r_i - \bar{r}\right)}_{\mathrm{Fitness\ deviation}}
+\end{equation}
+
+\subsubsection{Expected diversity coverage}
+
+\section{Difference equations}
+
+\begin{equation}
+\Delta f_i = 
+f_i(x(t+1), \theta(t+1)) - 
+f_i(x(t), \theta(t))
+\end{equation}
+
+\begin{equation}
+\Delta f_i = 
+f_i(x(t+1), \theta(t+1)) - 
+f_i(x(t), \theta(t))
+\end{equation}
+
+\begin{equation}
+\frac{f_i(x(t+1), \theta(t+1))}{f_i(x(t+1), \theta(t))}
+\frac{f_i(x(t+1), \theta(t))}{f_i(x(t), \theta(t))}
+\end{equation}
+
+\end{document}
